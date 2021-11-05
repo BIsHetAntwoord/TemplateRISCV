@@ -30,7 +30,7 @@ template <typename Mem, size_t Ind>
 struct DumpRegisters {
     static void dump() {
         DumpRegisters<Mem, Ind-1>::dump();
-        std::cout << (int)Get<Mem, Ind-1>::result << std::endl;
+        std::cout << Get<Mem, Ind-1>::result << std::endl;
     }
 };
 

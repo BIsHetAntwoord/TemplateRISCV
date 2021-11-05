@@ -1,0 +1,45 @@
+Build started at 2021-11-04T20:55:15.060676
+Main binary: /usr/bin/python.exe
+Build Options: -Dbackend=ninja
+Python system: MSYS_NT-10.0-19041
+The Meson build system
+Version: 0.55.1
+Source dir: /c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC
+Build dir: /c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC/build
+Build type: native build
+Using 'PKG_CONFIG_PATH' from environment with value: '/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig'
+WARNING: PKG_CONFIG_PATH environment variable has changed between configurations, meson ignores this. Use -Dpkg_config_path to change pkg-config search path instead.
+Using 'PKG_CONFIG_PATH' from environment with value: '/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig'
+WARNING: PKG_CONFIG_PATH environment variable has changed between configurations, meson ignores this. Use -Dpkg_config_path to change pkg-config search path instead.
+Project name: templateRISC
+Project version: 0.0.0
+C++ compiler for the build machine: c++ (gcc 9.3.0 "c++ (GCC) 9.3.0")
+C++ linker for the build machine: c++ ld.bfd 2.35
+None of 'AR' are defined in the environment, not changing global flags.
+C++ compiler for the host machine: c++ (gcc 9.3.0 "c++ (GCC) 9.3.0")
+C++ linker for the host machine: c++ ld.bfd 2.35
+None of 'AR' are defined in the environment, not changing global flags.
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Target machine cpu family: x86_64
+Target machine cpu: x86_64
+Build targets in project: 1
+
+Found ninja-1.10.0 at /usr/bin/ninja
+Running compile:
+Working directory:  /c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC/build/meson-private/tmpxoxr8i10
+Command line:  c++ /c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC/build/meson-private/tmpxoxr8i10/testfile.cpp -o /c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC/build/meson-private/tmpxoxr8i10/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-msys/9.3.0/
+programs: =/usr/lib/gcc/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../x86_64-pc-msys/bin/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../x86_64-pc-msys/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../x86_64-pc-msys/lib/x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../x86_64-pc-msys/lib/../lib/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../x86_64-pc-msys/9.3.0/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../lib/:/lib/x86_64-pc-msys/9.3.0/:/lib/../lib/:/usr/lib/x86_64-pc-msys/9.3.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../../x86_64-pc-msys/lib/:/usr/lib/gcc/x86_64-pc-msys/9.3.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+None of 'STRIP' are defined in the environment, not changing global flags.
+None of 'STRIP' are defined in the environment, not changing global flags.

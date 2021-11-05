@@ -1,0 +1,8 @@
+[
+  {
+    "directory": "/c/Users/Marcel/Documents/Data/Programeren/Projects/TemplateRISC/build",
+    "command": "c++ -Itemplrisc.exe.p -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -std=c++2a -O2 -g -MD -MQ templrisc.exe.p/src_main.cpp.o -MF templrisc.exe.p/src_main.cpp.o.d -o templrisc.exe.p/src_main.cpp.o -c ../src/main.cpp",
+    "file": "../src/main.cpp",
+    "output": "templrisc.exe.p/src_main.cpp.o"
+  }
+]

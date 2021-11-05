@@ -3,6 +3,7 @@
 
 #include "riscv/instr/base.hpp"
 
+// LUI
 template <typename Mem, typename Reg, uint32_t Funct3, uint32_t Funct7, typename Decoder>
 struct Instr<Mem, Reg, 0b0110111, Funct3, Funct7, Decoder> {
     using mem = Mem;

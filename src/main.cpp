@@ -5,7 +5,7 @@
 #include <cxxabi.h>
 
 using empty_memory = MakeMemory<16>::result;
-using memory = Write<uint32_t, empty_memory, 0, 0b0000000'00000'00000'010'00000'0110111>::result;
+using memory = Write<uint32_t, empty_memory, 0, 0b1000000'00000'00000'001'00011'0110111>::result;
 using empty_registers = MakeRegisters<0>::result;
 using registers = WriteRegister<empty_registers, 1, 2>::result;
 

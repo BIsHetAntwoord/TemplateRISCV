@@ -19,9 +19,19 @@ struct WriteRegister {
     using result = Registers<Regs::pc, typename Set<typename Regs::general, Regid, Value>::result>;
 };
 
+template <typename Regs, uint64_t Value>
+struct WriteRegister<Regs, 0, Value> {
+    using result = Regs;
+};
+
 template <typename Regs, uint32_t Regid>
 struct ReadRegister {
     const static uint64_t result = Get<typename Regs::general, Regid>::result;
+};
+
+template <typename Regs>
+struct ReadRegister<Regs, 0> {
+    const static uint64_t result = 0;
 };
 
 template <typename Regs, uint64_t Delta>

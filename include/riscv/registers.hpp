@@ -39,4 +39,9 @@ struct RegisterAddPC {
     using result = Registers<Regs::pc + Delta, typename Regs::general>;
 };
 
+template <typename Regs, uint64_t Value>
+struct RegisterSetPC {
+    using result = Registers<Value, typename Regs::general>;
+};
+
 #endif

@@ -1,18 +1,21 @@
 #include "riscv/executor.hpp"
 
 #include <iostream>
+#include <iomanip>
 #include <bitset>
 #include <typeinfo>
 #include <cxxabi.h>
 
 using empty_memory = MakeMemory<32>::result;
-using memory_t1 = Write<uint32_t, empty_memory, 0,  0b0000000'00001'00011'000'00001'0000011>::result;
-using memory_t2 = Write<uint32_t, memory_t1, 10, 0x12348687>::result;
-using memory = memory_t2;
+using memory_t1 = Write<uint32_t, empty_memory, 0,  0b0000000'00011'00001'101'00100'0010011>::result;
+using memory_instr_end = memory_t1;
+using memory_const_t1 = Write<uint32_t, memory_instr_end, 16, 0x12345678>::result;
+using memory_const_t2 = Write<uint32_t, memory_const_t1, 20, 0x9ABCDEF0>::result;
+using memory = memory_const_t2;
 
 using empty_registers = MakeRegisters<0>::result;
-using registers_t1 = WriteRegister<empty_registers, 3, 9>::result;
-using registers = registers_t1;
+using regs_temp_1 = WriteRegister<empty_registers, 1, 0x8000000000000000>::result;
+using registers = regs_temp_1;
 
 using executor = Executor<memory, registers>;
 using result = executor::result;
@@ -21,7 +24,12 @@ template <typename Mem, size_t Ind>
 struct DumpMemory {
     static void dump() {
         DumpMemory<Mem, Ind-1>::dump();
-        std::cout << (int)Read<uint8_t, Mem, Ind-1>::result << std::endl;
+        std::cout << std::hex << std::uppercase << std::setfill('0') << std::setw(2)
+            << (int)Read<uint8_t, Mem, Ind-1>::result << " " << std::resetiosflags(std::ios_base::basefield);
+
+        if constexpr(Ind % 16 == 0) {
+            std::cout << std::endl;
+        }
     }
 };
 

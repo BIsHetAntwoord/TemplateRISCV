@@ -361,4 +361,146 @@ struct Instr<Mem, Reg, 0b0010011, 0b101, 0b0100000, Decoder> {
     const static bool update_pc = true;
 };
 
+// ADD
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b000, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result + ReadRegister<Reg, Decoder::rs2>::result
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SUB
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b000, 0b0100000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result - ReadRegister<Reg, Decoder::rs2>::result
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SLL
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b001, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result << (ReadRegister<Reg, Decoder::rs2>::result & 0x3F)
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SLT
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b010, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    (int64_t(ReadRegister<Reg, Decoder::rs1>::result) < int64_t(ReadRegister<Reg, Decoder::rs2>::result))
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SLTU
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b011, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    (ReadRegister<Reg, Decoder::rs1>::result < ReadRegister<Reg, Decoder::rs2>::result)
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// XOR
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b100, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result ^ ReadRegister<Reg, Decoder::rs2>::result
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SRL
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b101, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    (ReadRegister<Reg, Decoder::rs1>::result >> (ReadRegister<Reg, Decoder::rs2>::result & 0x3F))
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// SRA
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b101, 0b0100000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    (int64_t(ReadRegister<Reg, Decoder::rs1>::result) >> int64_t(ReadRegister<Reg, Decoder::rs2>::result & 0x3F))
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// OR
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b110, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result | ReadRegister<Reg, Decoder::rs2>::result
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// AND
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b0110011, 0b111, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = WriteRegister<Reg, Decoder::rd,
+                    ReadRegister<Reg, Decoder::rs1>::result & ReadRegister<Reg, Decoder::rs2>::result
+                >::result;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// FENCE
+template <typename Mem, typename Reg, uint32_t Funct7, typename Decoder>
+struct Instr<Mem, Reg, 0b0001111, 0b000, Funct7, Decoder> {
+    using mem = Mem;
+    using reg = Reg;
+
+    const static bool done = false;
+    const static bool update_pc = true;
+};
+
+// ECALL/EBREAK
+template <typename Mem, typename Reg, typename Decoder>
+struct Instr<Mem, Reg, 0b1110011, 0b000, 0b0000000, Decoder> {
+    using mem = Mem;
+    using reg = Reg;
+
+    // END VM
+
+    const static bool done = true;
+    const static bool update_pc = false;
+};
+
 #endif

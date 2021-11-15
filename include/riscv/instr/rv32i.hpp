@@ -326,8 +326,8 @@ struct Instr<Mem, Reg, 0b0010011, 0b111, Funct7, Decoder> {
 };
 
 // SLLI
-template <typename Mem, typename Reg, typename Decoder>
-struct Instr<Mem, Reg, 0b0010011, 0b001, 0b0000000, Decoder> {
+template <typename Mem, typename Reg, uint32_t Funct7, typename Decoder>
+struct Instr<Mem, Reg, 0b0010011, 0b001, Funct7, Decoder> {
     using mem = Mem;
     using reg = WriteRegister<Reg, Decoder::rd,
                     ReadRegister<Reg, Decoder::rs1>::result << Decoder::i_imm
@@ -337,12 +337,15 @@ struct Instr<Mem, Reg, 0b0010011, 0b001, 0b0000000, Decoder> {
     const static bool update_pc = true;
 };
 
+template <typename Mem, typename Reg, typename Decoder, bool Arith>
+struct ShrInstrInternal;
+
 // SRLI
 template <typename Mem, typename Reg, typename Decoder>
-struct Instr<Mem, Reg, 0b0010011, 0b101, 0b0000000, Decoder> {
+struct ShrInstrInternal<Mem, Reg, Decoder, false> {
     using mem = Mem;
     using reg = WriteRegister<Reg, Decoder::rd,
-                    (ReadRegister<Reg, Decoder::rs1>::result >> Decoder::i_imm)
+                    (ReadRegister<Reg, Decoder::rs1>::result >> (Decoder::i_imm & 0x3F))
                 >::result;
 
     const static bool done = false;
@@ -351,14 +354,26 @@ struct Instr<Mem, Reg, 0b0010011, 0b101, 0b0000000, Decoder> {
 
 // SRAI
 template <typename Mem, typename Reg, typename Decoder>
-struct Instr<Mem, Reg, 0b0010011, 0b101, 0b0100000, Decoder> {
+struct ShrInstrInternal<Mem, Reg, Decoder, true> {
     using mem = Mem;
     using reg = WriteRegister<Reg, Decoder::rd,
-                    (int64_t(ReadRegister<Reg, Decoder::rs1>::result) >> int64_t(Decoder::i_imm & 0x1F))
+                    (int64_t(ReadRegister<Reg, Decoder::rs1>::result) >> int64_t(Decoder::i_imm & 0x3F))
                 >::result;
 
     const static bool done = false;
     const static bool update_pc = true;
+};
+
+// SR(A/L)I
+template <typename Mem, typename Reg, uint32_t Funct7, typename Decoder>
+struct Instr<Mem, Reg, 0b0010011, 0b101, Funct7, Decoder> {
+    using internals = ShrInstrInternal<Mem, Reg, Decoder, bool((Funct7 >> 5) & 1)>;
+
+    using mem = typename internals::mem;
+    using reg = typename internals::reg;
+
+    const static bool done = internals::done;
+    const static bool update_pc = internals::update_pc;
 };
 
 // ADD

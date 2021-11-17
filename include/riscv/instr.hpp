@@ -7,6 +7,7 @@
 #include "riscv/instr/rv32i.hpp"
 #include "riscv/instr/rv64i.hpp"
 #include "riscv/instr/rv32m.hpp"
+#include "riscv/instr/rv64m.hpp"
 
 template <bool Update, typename Regs, uint64_t Delta>
 struct UpdatePC;

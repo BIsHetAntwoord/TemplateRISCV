@@ -5,3 +5,4 @@ A RISC-V emulator written in C++ templates.
 * RV32I (ECALL and EBREAK terminate execution, FENCE is a NOP)
 * RV64I
 * RV32M
+* RV64M

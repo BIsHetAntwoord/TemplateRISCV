@@ -7,15 +7,17 @@
 #include <cxxabi.h>
 
 using empty_memory = MakeMemory<32>::result;
-using memory_t1 = Write<uint32_t, empty_memory, 0,  0b0000000'00011'00001'000'00010'0011011>::result;
-using memory_instr_end = memory_t1;
+using memory_t1 = Write<uint32_t, empty_memory, 0,  0b0000001'00010'00001'100'00011'0110011>::result;
+using memory_t2 = Write<uint32_t, memory_t1,    4,  0b0000001'00010'00001'110'00100'0110011>::result;
+using memory_instr_end = memory_t2;
 using memory_const_t1 = Write<uint32_t, memory_instr_end, 16, 0x01234567>::result;
 using memory_const_t2 = Write<uint32_t, memory_const_t1, 20, 0x89ABCDEF>::result;
 using memory = memory_const_t2;
 
 using empty_registers = MakeRegisters<0>::result;
-using regs_temp_1 = WriteRegister<empty_registers, 1, 0x0000000000000004ull>::result;
-using registers = regs_temp_1;
+using regs_temp_1 = WriteRegister<empty_registers, 1, 10>::result;
+using regs_temp_2 = WriteRegister<regs_temp_1, 2, 3>::result;
+using registers = regs_temp_2;
 
 using executor = Executor<memory, registers>;
 using result = executor::result;
